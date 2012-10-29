@@ -393,6 +393,7 @@ int CGameStartup::Update(bool haveFocus, unsigned int updateFlags)
 	if (cur_time.GetDifferenceInSeconds(LAST_LOGGED_TIME) > 1.0) {
 		CryLogAlways("%f", LAST_LOGGED_TIME.GetSeconds());
 		LAST_LOGGED_TIME = cur_time;
+		gEnv->pConsole->ExecuteString("r_getScreenShot 2");
 	}
 
 	int returnCode = 0;
