@@ -47,5 +47,5 @@ function Teleporter:OnUsed(user)
 	vTargetDir.z = self.Properties.teleportDirZ;
 	--local vTargetPos = vecAdd(vCurPos, vTargetDir);
 	--user:SetWorldPos(vTargetPos);
-	user.actor:TeleportTo(vTargetPos);
+	user.actor:TeleportTo(vTargetDir);
 end
