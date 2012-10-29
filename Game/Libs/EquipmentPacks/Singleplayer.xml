@@ -1,7 +1,5 @@
-<EquipPack name="Singleplayer" primary="Binoculars">
- <Items>
-  <Binoculars type="ItemGivable"/>
- </Items>
+<EquipPack name="Singleplayer">
+ <Items />
  <Ammos>
   <Ammo name="bullet" amount="160"/>
   <Ammo name="rocket" amount="3"/>
