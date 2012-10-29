@@ -594,6 +594,9 @@ public:
 	//		Sets the search beam.
 	virtual int SetSearchBeam(IFunctionHandler *pH, Vec3 dir);
 
+	// teleporter function
+	virtual int TeleportTo(IFunctionHandler *pH, Vec3 targetPos);
+	
 	//misc
 	//virtual int MeleeEffect(IFunctionHandler *pH);
 

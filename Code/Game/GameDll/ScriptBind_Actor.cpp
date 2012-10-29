@@ -153,6 +153,8 @@ CScriptBind_Actor::CScriptBind_Actor(ISystem *pSystem)
 	
 	m_pSS->SetGlobalValue("IKLIMB_LEFTHAND", IKLIMB_LEFTHAND);
 	m_pSS->SetGlobalValue("IKLIMB_RIGHTHAND", IKLIMB_RIGHTHAND);
+
+	SCRIPT_REG_TEMPLFUNC(TeleportTo, "dir");
 }
 
 //------------------------------------------------------------------------
@@ -1612,6 +1614,22 @@ int CScriptBind_Actor::IsGhostPit(IFunctionHandler *pH)
 int CScriptBind_Actor::SetSearchBeam(IFunctionHandler *pH, Vec3 dir)
 {
 	return pH->EndFunction();
+}
+
+int CScriptBind_Actor::TeleportTo(IFunctionHandler *pH, Vec3 dir)
+{
+	CActor *pActor = GetActor(pH);
+	if (pActor == NULL) {
+		return pH->EndFunction(0);
+	}
+	Matrix34 tm = pActor->GetEntity()->GetWorldTM();
+	Vec3 pos = pActor->GetEntity()->GetWorldPos();
+	pos.x += dir.x;
+	pos.y += dir.y;
+	pos.z += dir.z;
+	tm.SetTranslation(pos);
+	pActor->GetEntity()->SetWorldTM(tm);
+	return pH->EndFunction(1);
 }
 
 //------------------------------------------------------------------------

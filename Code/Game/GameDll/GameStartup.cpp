@@ -387,7 +387,7 @@ int CGameStartup::Update(bool haveFocus, unsigned int updateFlags)
 #if defined(JOBMANAGER_SUPPORT_PROFILING)
 	gEnv->GetJobManager()->SetFrameStartTime(gEnv->pTimer->GetAsyncTime());
 #endif
-
+	//CryLogAlways("hello\n");
 
 
 	int returnCode = 0;
