@@ -381,6 +381,7 @@ void CGameStartup::Shutdown()
 	// call the destructor manually instead
 	this->~CGameStartup();
 }
+static CTimeValue LAST_LOGGED_TIME;
 
 int CGameStartup::Update(bool haveFocus, unsigned int updateFlags)
 {
@@ -388,7 +389,11 @@ int CGameStartup::Update(bool haveFocus, unsigned int updateFlags)
 	gEnv->GetJobManager()->SetFrameStartTime(gEnv->pTimer->GetAsyncTime());
 #endif
 	//CryLogAlways("hello\n");
-
+	CTimeValue cur_time = gEnv->pTimer->GetAsyncTime();
+	if (cur_time.GetDifferenceInSeconds(LAST_LOGGED_TIME) > 1.0) {
+		CryLogAlways("%f", LAST_LOGGED_TIME.GetSeconds());
+		LAST_LOGGED_TIME = cur_time;
+	}
 
 	int returnCode = 0;
 
