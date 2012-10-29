@@ -2,3 +2,4 @@
 *.exe
 *.pak
 *.lib
+*.DS_STORE
