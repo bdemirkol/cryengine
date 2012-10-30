@@ -33,42 +33,23 @@ function Teleporter:IsUsable(user)
 end
 
 function Teleporter:OnUsed(user)
-	--check   "user" is valid
-	--if (not user) then
-	--	return 0;
-	--end
-	--computer target position from current+teleprot
-	--local vCurPos = {}
-	--user:GetWorldPos(vCurPos);
-	local vCurPos = {};
-	user:GetWorldPos(vCurPos);
-	local vTargetDir = {}; --assign a temp vector as targetDir „type“
-	local file = io.open("example.txt", "r")
-    local n1, n2, n3 = file:read("*number", "*number", "*number")
-	vTargetDir.x =n1;
-	vTargetDir.y =n2;
-	vTargetDir.z =n3;
-	file:close()
-	local file2 = io.open("example2.txt", "w")
-	for i, l in pairs(vTargetDir) do
-	     file2:write(tostring(i).." "..tostring(l).."\n")
-	ends
-	file2:close()
-	local vTargetPos = vecAdd(vCurPos, vTargetDir); -- seems like this does some kind of cast. keep that.
-	--vTargetDir.x = self.Properties.teleportDirX;
-	--vTargetDir.y = self.Properties.teleportDirY;
-	--vTargetDir.z = self.Properties.teleportDirZ;
 
-	--(tostring(vCurPos).." "..tostring(vTargetDir).." "..tostring(vCurPos[2]));
-
-	self:SetWorldPos(vCurPos);
-	
 end
 
 function Teleporter:OnUpdate(dt)
 	local vCurPos = {};
 	self:GetWorldPos(vCurPos);
-	vCurPos.x = vCurPos.x + .001;
-	self:SetWorldPos(vCurPos);
+	local vTargetDir = {}; --assign a temp vector as targetDir „type“
+	local file = io.open("comm/comm.txt", "r")
+    local n1, n2, n3 = file:read("*number", "*number", "*number")
+	file:close()
+    if n1 ~= nil do
+        io.remove("comm/comm.txt")
+        vTargetDir.x = n1;
+        vTargetDir.y = n2;
+        vTargetDir.z = n3;
+    end
+	local vTargetPos = vecAdd(vCurPos, vTargetDir); -- seems like this does some kind of cast. keep that.
+	self:SetWorldPos(vTargetPos);
 end
 	

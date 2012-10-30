@@ -1,27 +1,35 @@
 from __future__ import print_function
-import time
-import logging
+import os
+from time import sleep
 from watchdog.observers import Observer
-from watchdog.events import LoggingEventHandler, FileSystemEventHandler
+from watchdog.events import FileSystemEventHandler
 
 class ScreenshotEventHandler(FileSystemEventHandler):
-    #def on_any_event(self, event):
-    #    print(event)
     def on_created(self, event):
-        print(event)
+        #print(event)
+        fpath = event.src_path
+        with open(fpath, 'rb') as f:
+            z = f.read()
+            print('read {0} from {1}'.format(z[:50], fpath))
+        os.remove(fpath)
+        with open('comm/comm.txt', 'w') as f:
+            # init value of self.i
+            try:
+                k = self.i
+            except:
+                self.i = 0
+            f.write('{0} {1} {2}'.format(self.i, 0, 0))
+            self.i += .01
+            print('Wrote to {0} val {1}'.format(f.fname, self.i))
 
 if __name__ == "__main__":
-    #logging.basicConfig(level=logging.INFO,
-    #                    format='%(asctime)s - %(message)s',
-    #                    datefmt='%Y-%m-%d %H:%M:%S')
-    #event_handler = LoggingEventHandler()
     event_handler = ScreenshotEventHandler()
     observer = Observer()
-    observer.schedule(event_handler, '.', recursive=True)
+    observer.schedule(event_handler, 'USER/ScreenShots/')
     observer.start()
     try:
         while True:
-            time.sleep(1)
+            sleep(1)
     except KeyboardInterrupt:
         observer.stop()
     observer.join() #observer is a thread, and this is the threading.join method
