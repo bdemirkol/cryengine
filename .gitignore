@@ -14,3 +14,5 @@ error.dmp
 example.txt
 example2.txt
 luac.out
+Editor/UI/
+comm/comm.txt

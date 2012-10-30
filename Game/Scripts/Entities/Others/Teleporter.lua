@@ -37,6 +37,7 @@ function Teleporter:OnUsed(user)
 end
 
 function Teleporter:OnUpdate(dt)
+    System.ShowDebugger()
 	local vCurPos = {};
 	self:GetWorldPos(vCurPos);
 	local vTargetDir = {}; --assign a temp vector as targetDir „type“
