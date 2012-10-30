@@ -44,7 +44,7 @@ function Teleporter:OnUsed(user)
 	user:GetWorldPos(vCurPos);
 	local vTargetDir = {}; --assign a temp vector as targetDir „type“
 	local file = io.open("example.txt", "r")
-    local n1, n2, n3 = io.read("*number", "*number", "*number")
+    local n1, n2, n3 = file:read("*number", "*number", "*number")
 	vTargetDir.x =n1;
 	vTargetDir.y =n2;
 	vTargetDir.z =n3;
