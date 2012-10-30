@@ -43,16 +43,24 @@ function Teleporter:OnUsed(user)
 	local vCurPos = {};
 	user:GetWorldPos(vCurPos);
 	local vTargetDir = {}; --assign a temp vector as targetDir „type“
-	vTargetDir.x = self.Properties.teleportDirX;
-	vTargetDir.y = self.Properties.teleportDirY;
-	vTargetDir.z = self.Properties.teleportDirZ;
-	local vTargetPos = vecAdd(vCurPos, vTargetDir); -- seems like this does some kind of cast. keep that.
-	local file = io.open("example.txt", "w")
-	for i,v in pairs(vTargetPos) do 
-		file:write(tostring(i).." "..tostring(v).."\n")
-	end
-	--(tostring(vCurPos).." "..tostring(vTargetDir).." "..tostring(vCurPos[2]));
+	local file = io.open("example.txt", "r")
+    local n1, n2, n3 = io.read("*number", "*number", "*number")
+	vTargetDir.x =n1;
+	vTargetDir.y =n2;
+	vTargetDir.z =n3;
 	file:close()
+	local file2 = io.open("example2.txt", "w")
+	for i, l in pairs(vTargetDir) do
+	     file2:write(tostring(i).." "..tostring(l).."\n")
+	end
+	file2:close()
+	local vTargetPos = vecAdd(vCurPos, vTargetDir); -- seems like this does some kind of cast. keep that.
+	--vTargetDir.x = self.Properties.teleportDirX;
+	--vTargetDir.y = self.Properties.teleportDirY;
+	--vTargetDir.z = self.Properties.teleportDirZ;
+
+	--(tostring(vCurPos).." "..tostring(vTargetDir).." "..tostring(vCurPos[2]));
+
 	self:SetWorldPos(vTargetPos);
 	
 end
