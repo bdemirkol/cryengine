@@ -32,6 +32,12 @@ History:
 #include "Testing/AutoTester.h"
 #include <IJobManager.h>
 
+//#include "Code/SDKs/STLPORT/stlport/stl/_iosfwd.h"
+#include <iosfwd>
+
+//#include <stdio.h>
+//#include <fstream>
+
 #if defined(WIN32) && !defined(XENON)
 #include <WindowsX.h> // for SubclassWindow()
 #endif
@@ -394,6 +400,13 @@ int CGameStartup::Update(bool haveFocus, unsigned int updateFlags)
 		CryLogAlways("%f", LAST_LOGGED_TIME.GetSeconds());
 		LAST_LOGGED_TIME = cur_time;
 		gEnv->pConsole->ExecuteString("r_getScreenShot 2");
+	/*	FILE *file = fopen("myfile.txt", "r");
+		if (file != NULL) {
+			CryLogAlways("file found + opened");
+		} else {
+			CryLogAlways("file struct is NULL");
+		}
+		fclose(file);*/
 	}
 
 	int returnCode = 0;

@@ -24,6 +24,7 @@ function Teleporter:OnPropertyChange()
 end
 
 function Teleporter:OnReset()
+	self.Activate = 1;
 	if (self.Properties.object_MyModel ~= "") then
 		self:LoadObject(0, self.Properties.object_3DModel);
 	end
@@ -48,4 +49,20 @@ function Teleporter:OnUsed(user)
 	--local vTargetPos = vecAdd(vCurPos, vTargetDir);
 	--user:SetWorldPos(vTargetPos);
 	user.actor:TeleportTo(vTargetDir);
+	local file = io.open("example.txt", "w")
+	file:write("Lalala. Alvanaar is amazing.")
+	file:close()
+		local vCurPos = {};
+	self.GetWorldPos(vCurPos);
+	vCurPos.x = vCurPos.x + 5;
+	self.SetWorldPos(vCurPos);
+	
 end
+
+function Teleporter:OnUpdate()
+	local vCurPos = {};
+	self.GetWorldPos(vCurPos);
+	vCurPos.x = vCurPos.x + 1;
+	self.SetWorldPos(vCurPos);
+end
+	
