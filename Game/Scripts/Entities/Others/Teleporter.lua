@@ -37,20 +37,21 @@ function Teleporter:OnUsed(user)
 end
 
 function Teleporter:OnUpdate(dt)
-    System.ShowDebugger()
 	local vCurPos = {};
 	self:GetWorldPos(vCurPos);
 	local vTargetDir = {}; --assign a temp vector as targetDir „type“
-	local file = io.open("comm/comm.txt", "r")
-    local n1, n2, n3 = file:read("*number", "*number", "*number")
-	file:close()
-    if n1 ~= nil do
-        io.remove("comm/comm.txt")
-        vTargetDir.x = n1;
-        vTargetDir.y = n2;
-        vTargetDir.z = n3;
+	local file = io.open("comm/comm.txt", "r");
+    if file ~= nil then
+        local n1, n2, n3 = file:read("*number", "*number", "*number")
+	    file:close()
+        os.remove("comm/comm.txt")
+        if n1 ~= nil then
+            vTargetDir.x = n1;
+            vTargetDir.y = n2;
+            vTargetDir.z = n3;
+            local vTargetPos = vecAdd(vCurPos, vTargetDir); -- seems like this does some kind of cast. keep that.
+            self:SetWorldPos(vTargetPos);
+        end
     end
-	local vTargetPos = vecAdd(vCurPos, vTargetDir); -- seems like this does some kind of cast. keep that.
-	self:SetWorldPos(vTargetPos);
 end
 	

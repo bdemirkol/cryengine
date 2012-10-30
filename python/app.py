@@ -26,7 +26,7 @@ class ScreenshotEventHandler(FileSystemEventHandler):
             except:
                 self.i = 0
             f.write('{0} {1} {2}'.format(self.i, 0, 0))
-            self.i += .01
+            self.i += .001
             print('Wrote to {0} val {1}'.format(f.name, self.i))
 
 if __name__ == "__main__":
