@@ -3,3 +3,14 @@
 *.pak
 *.lib
 *.DS_STORE
+Bin32/
+Bin64/
+BinTemp/
+*.log
+LogBackups/
+Tools/
+USER/
+error.dmp
+example.txt
+example2.txt
+luac.out
