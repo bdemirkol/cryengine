@@ -22,7 +22,7 @@ function Teleporter:OnPropertyChange()
 end
 
 function Teleporter:OnReset()
-	self.Activate = 1;
+	self:Activate(1);
 	if (self.Properties.object_MyModel ~= "") then
 		self:LoadObject(0, self.Properties.object_3DModel);
 	end
@@ -52,7 +52,7 @@ function Teleporter:OnUsed(user)
 	local file2 = io.open("example2.txt", "w")
 	for i, l in pairs(vTargetDir) do
 	     file2:write(tostring(i).." "..tostring(l).."\n")
-	end
+	ends
 	file2:close()
 	local vTargetPos = vecAdd(vCurPos, vTargetDir); -- seems like this does some kind of cast. keep that.
 	--vTargetDir.x = self.Properties.teleportDirX;
@@ -61,14 +61,14 @@ function Teleporter:OnUsed(user)
 
 	--(tostring(vCurPos).." "..tostring(vTargetDir).." "..tostring(vCurPos[2]));
 
-	self:SetWorldPos(vTargetPos);
+	self:SetWorldPos(vCurPos);
 	
 end
 
-function Teleporter:OnUpdate()
+function Teleporter:OnUpdate(dt)
 	local vCurPos = {};
-	self.GetWorldPos(vCurPos);
-	vCurPos.x = vCurPos.x + 1;
-	self.SetWorldPos(vCurPos);
+	self:GetWorldPos(vCurPos);
+	vCurPos.x = vCurPos.x + .001;
+	self:SetWorldPos(vCurPos);
 end
 	
